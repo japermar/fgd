@@ -33,8 +33,8 @@ class VpsController extends Controller
     {
         $vps = \App\Models\Servidor::where('id', $vps_id)->first();
         $comando = "docker stop $(docker ps -q)";
-        $output = $vps->ejecutar_comando($comando);
-        return '<p>Se han apagado todos los servicios correctamente</p>';
+//        $output = $vps->ejecutar_comando($comando);
+        return '<p>Se han apagado todos los servicios correctamente puede tardar un segundo en verse reflejado</p>';
     }
 
     public function ejecutar_bash_script(Request $request, $vps_id)
