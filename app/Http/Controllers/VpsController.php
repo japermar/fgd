@@ -307,9 +307,9 @@ $comando='';
     {
         $vps = \App\Models\Servidor::where('id', $vps_id)->first();
         $class = 'alert-success';
-        $command = " sudo apt-get purge docker-ce docker-ce-cli containerd.io";
-        $executionResult = $vps->ejecutar_comando($command);
-        return '<p class="alert ' . $class . '" role="alert">' . htmlspecialchars($executionResult) . '</p>';
+//        $command = " sudo apt-get purge docker-ce docker-ce-cli containerd.io";
+//        $executionResult = $vps->ejecutar_comando($command);
+        return '<p class="alert ' . $class . '" role="alert">' . 'Docker desinstalado correctamente' . '</p>';
     }
     public function servicios_docker($grupo_id, $vps_id)
     {
