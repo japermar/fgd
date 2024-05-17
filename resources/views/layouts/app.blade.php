@@ -18,46 +18,6 @@
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script>
-
-        document.body.addEventListener('htmx:configRequest', function (event) {
-            event.detail.headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        });
-
-
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Use document.querySelectorAll to select all buttons with the hx-post attribute
-            const htmxButtons = document.querySelectorAll('sl-button[hx-post]');
-            htmxButtons.forEach(button => {
-                button.addEventListener('htmx:beforeRequest', function () {
-                    button.setAttribute('loading', '');
-                });
-                button.addEventListener('htmx:afterRequest', function () {
-                    button.removeAttribute('loading');
-                });
-            });
-            const menu_items = document.querySelectorAll('sl-menu-item[hx-post]');
-            menu_items.forEach(button => {
-                button.addEventListener('htmx:beforeRequest', function () {
-                    console.log('before');
-                    const parent = document.getElementById('imagenes')
-                    parent.setAttribute('loading', '');
-                });
-                button.addEventListener('htmx:afterRequest', function () {
-                    const parent = document.getElementById('imagenes')
-                    console.log('after');
-                    parent.removeAttribute('loading');
-                });
-            });
-
-        });
-
-
-
-
-    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
@@ -124,4 +84,49 @@
         </main>
     </div>
 </body>
+
+
+
+
+<script>
+
+    document.body.addEventListener('htmx:configRequest', function (event) {
+        event.detail.headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Use document.querySelectorAll to select all buttons with the hx-post attribute
+        const htmxButtons = document.querySelectorAll('sl-button[hx-post]');
+        htmxButtons.forEach(button => {
+            button.addEventListener('htmx:beforeRequest', function () {
+                button.setAttribute('loading', '');
+            });
+            button.addEventListener('htmx:afterRequest', function () {
+                button.removeAttribute('loading');
+            });
+        });
+        const menu_items = document.querySelectorAll('sl-menu-item[hx-post]');
+        menu_items.forEach(button => {
+            button.addEventListener('htmx:beforeRequest', function () {
+                console.log('before');
+                const parent = document.getElementById('imagenes')
+                parent.setAttribute('loading', '');
+            });
+            button.addEventListener('htmx:afterRequest', function () {
+                const parent = document.getElementById('imagenes')
+                console.log('after');
+                parent.removeAttribute('loading');
+            });
+        });
+
+    });
+
+
+
+
+</script>
+
 </html>
