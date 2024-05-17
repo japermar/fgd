@@ -56,10 +56,21 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                        {{ Auth::user()->name }}
                                     </form>
+                                </div>
                             </li>
 
                         @endguest
@@ -73,49 +84,4 @@
         </main>
     </div>
 </body>
-
-
-
-
-<script>
-
-    document.body.addEventListener('htmx:configRequest', function (event) {
-        event.detail.headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    });
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // Use document.querySelectorAll to select all buttons with the hx-post attribute
-        const htmxButtons = document.querySelectorAll('sl-button[hx-post]');
-        htmxButtons.forEach(button => {
-            button.addEventListener('htmx:beforeRequest', function () {
-                button.setAttribute('loading', '');
-            });
-            button.addEventListener('htmx:afterRequest', function () {
-                button.removeAttribute('loading');
-            });
-        });
-        const menu_items = document.querySelectorAll('sl-menu-item[hx-post]');
-        menu_items.forEach(button => {
-            button.addEventListener('htmx:beforeRequest', function () {
-                console.log('before');
-                const parent = document.getElementById('imagenes')
-                parent.setAttribute('loading', '');
-            });
-            button.addEventListener('htmx:afterRequest', function () {
-                const parent = document.getElementById('imagenes')
-                console.log('after');
-                parent.removeAttribute('loading');
-            });
-        });
-
-    });
-
-
-
-
-</script>
-
 </html>
